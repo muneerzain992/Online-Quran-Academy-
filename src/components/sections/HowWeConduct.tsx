@@ -11,12 +11,12 @@ export async function HowWeConduct() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
       <Reveal>
-        <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="text-center font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
           {t("heading")}
         </h2>
       </Reveal>
 
-      <Stagger className="mt-10 grid gap-4 sm:grid-cols-3">
+      <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, i) => {
           const Icon = icons[i % icons.length];
           return (

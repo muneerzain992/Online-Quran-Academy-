@@ -71,28 +71,26 @@ export function ContactForm() {
           {...register("email")}
         />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Controller
-          name="phone"
-          control={control}
-          render={({ field }) => (
-            <PhoneInput
-              label={t("phoneOptional")}
-              name={field.name}
-              value={field.value ?? ""}
-              onBlur={field.onBlur}
-              onChange={field.onChange}
-              error={errors.phone?.message}
-            />
-          )}
-        />
-        <Input
-          label={t("subject")}
-          placeholder={t("subjectPlaceholder")}
-          error={errors.subject?.message}
-          {...register("subject")}
-        />
-      </div>
+      <Controller
+        name="phone"
+        control={control}
+        render={({ field }) => (
+          <PhoneInput
+            label={t("phoneOptional")}
+            name={field.name}
+            value={field.value ?? ""}
+            onBlur={field.onBlur}
+            onChange={field.onChange}
+            error={errors.phone?.message}
+          />
+        )}
+      />
+      <Input
+        label={t("subject")}
+        placeholder={t("subjectPlaceholder")}
+        error={errors.subject?.message}
+        {...register("subject")}
+      />
       <Textarea
         label={t("message")}
         rows={5}

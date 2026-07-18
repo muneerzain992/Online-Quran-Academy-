@@ -47,7 +47,7 @@ export function NewsletterForm() {
       <label htmlFor="footer-email" className="sr-only">
         {t("label")}
       </label>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <input
           id="footer-email"
           type="email"
@@ -60,12 +60,12 @@ export function NewsletterForm() {
           placeholder={t("placeholder")}
           disabled={status === "loading"}
           aria-invalid={!!fieldError}
-          className="focus-ring w-full rounded-xl border border-border bg-surface/50 px-3 py-2 text-sm text-foreground placeholder:text-muted disabled:opacity-60"
+          className="focus-ring w-full min-w-0 rounded-xl border border-border bg-surface/50 px-3 py-2 text-sm text-foreground placeholder:text-muted disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="focus-ring shrink-0 rounded-xl bg-royal px-3 py-2 text-sm font-medium text-white hover:bg-royal/90 disabled:opacity-70"
+          className="focus-ring shrink-0 rounded-xl bg-royal px-3 py-2 text-sm font-medium text-white hover:bg-royal/90 disabled:opacity-70 sm:self-stretch"
         >
           {status === "loading" ? t("loading") : t("joinShort")}
         </button>

@@ -59,7 +59,18 @@ export function MagneticButton({
     </button>
   );
 
-  if (reduced) return content;
+  const wrapperClass = cn(
+    "will-change-transform",
+    className?.includes("w-full") ? "block w-full" : "inline-block",
+  );
+
+  if (reduced) {
+    return className?.includes("w-full") ? (
+      <div className="block w-full">{content}</div>
+    ) : (
+      content
+    );
+  }
 
   return (
     <motion.div
@@ -67,7 +78,7 @@ export function MagneticButton({
       style={{ x: springX, y: springY }}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="inline-block will-change-transform"
+      className={wrapperClass}
     >
       {content}
     </motion.div>

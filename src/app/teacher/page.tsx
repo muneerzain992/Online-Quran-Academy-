@@ -20,7 +20,7 @@ export default async function TeacherDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard label="New trial requests" value={newBookings} />
         <StatCard label="Students" value={students} />
         <StatCard label="Progress notes" value={notes} />

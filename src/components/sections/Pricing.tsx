@@ -47,7 +47,7 @@ export function Pricing({ plans }: { plans: PricingPlanItem[] }) {
         />
       </Reveal>
 
-      <Stagger className="mt-12 grid gap-5 lg:grid-cols-3">
+      <Stagger className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {plans.map((plan) => (
           <StaggerItem key={plan.id}>
             <PricingCard
@@ -121,7 +121,7 @@ function PricingCard({
       )}
     >
       {plan.popular ? (
-        <span className="absolute -top-3 start-1/2 -translate-x-1/2 rounded-full border border-gold/50 bg-navy px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold rtl:translate-x-1/2">
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-gold/50 bg-navy px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold">
           {popularLabel}
         </span>
       ) : null}

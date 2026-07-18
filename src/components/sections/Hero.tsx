@@ -25,7 +25,7 @@ export async function Hero() {
           <TextReveal
             as="h1"
             text={t("headline")}
-            className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem] lg:leading-[1.15]"
+            className="font-display text-[1.875rem] font-semibold leading-tight tracking-tight text-foreground sm:text-4xl sm:leading-tight md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]"
             delay={0.05}
           />
 
@@ -41,9 +41,15 @@ export async function Hero() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.3} className="mt-8 flex flex-wrap items-center gap-3">
-            <MagneticButton href="/book">{tCta("bookTrial")}</MagneticButton>
-            <Button href="/courses" variant="secondary">
+          <Reveal delay={0.3} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <MagneticButton href="/book" className="w-full sm:w-auto">
+              {tCta("bookTrial")}
+            </MagneticButton>
+            <Button
+              href="/courses"
+              variant="secondary"
+              className="w-full sm:w-auto"
+            >
               {tCta("exploreCourses")}
             </Button>
           </Reveal>

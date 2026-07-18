@@ -31,7 +31,7 @@ export default async function AdminPage() {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard label="Bookings" value={bookings} />
         <StatCard label="Messages" value={messages} />
         <StatCard label="Subscribers" value={subscribers} />

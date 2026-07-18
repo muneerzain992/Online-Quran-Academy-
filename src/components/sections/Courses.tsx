@@ -52,7 +52,7 @@ export function Courses({ items }: { items: HomeCourse[] }) {
           />
         </Reveal>
 
-        <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {items.map((course) => (
             <CourseCard
               key={course.slug}
@@ -164,7 +164,7 @@ function CourseModal({
             <button
               type="button"
               onClick={onClose}
-              className="focus-ring absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:text-foreground"
+              className="focus-ring absolute end-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:text-foreground"
               aria-label="Close"
             >
               <X className="h-4 w-4" />
@@ -175,7 +175,7 @@ function CourseModal({
             </div>
             <h3
               id={titleId}
-              className="pr-8 font-display text-2xl font-semibold text-foreground"
+              className="pe-8 font-display text-2xl font-semibold text-foreground"
             >
               {course.title}
             </h3>

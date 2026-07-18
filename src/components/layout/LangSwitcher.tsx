@@ -8,7 +8,7 @@ import { type Locale } from "@/i18n/config";
 import { setUserLocale } from "@/i18n/locale";
 import { cn } from "@/lib/cn";
 
-export function LangSwitcher() {
+export function LangSwitcher({ className }: { className?: string }) {
   const locale = useLocale();
   const t = useTranslations("A11y");
   const router = useRouter();
@@ -24,7 +24,7 @@ export function LangSwitcher() {
 
   return (
     <div
-      className="hidden items-center gap-1 sm:flex"
+      className={cn("hidden items-center gap-1 lg:flex", className)}
       role="group"
       aria-label={t("language")}
     >

@@ -29,9 +29,9 @@ export function TextReveal({
   }
 
   return (
-    <Tag className={cn("overflow-hidden", className)} aria-label={text}>
+    <Tag className={cn("pb-[0.12em]", className)} aria-label={text}>
       <motion.span
-        className="flex flex-wrap"
+        className="flex flex-wrap gap-y-1"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-5% 0px" }}

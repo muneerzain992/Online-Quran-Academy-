@@ -32,7 +32,7 @@ export function BackToTop() {
           initial={reduced ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           exit={reduced ? undefined : { opacity: 0, y: 12 }}
-          className="focus-ring fixed bottom-6 end-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-midnight/90 text-sky shadow-lg backdrop-blur-md hover:border-sky/40"
+          className="focus-ring fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] end-[max(1.25rem,env(safe-area-inset-right))] z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-midnight/90 text-sky shadow-lg backdrop-blur-md hover:border-sky/40 sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:end-[max(1.5rem,env(safe-area-inset-right))]"
         >
           <ArrowUp className="h-4 w-4" />
         </motion.button>

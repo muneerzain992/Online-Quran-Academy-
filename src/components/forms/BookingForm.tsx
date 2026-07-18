@@ -303,37 +303,45 @@ export function BookingForm() {
                   {t("reviewTitle", { trialOffer: tSite("trialOffer") })}
                 </p>
                 <dl className="space-y-2 rounded-2xl border border-border bg-surface/30 p-4">
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("student")}</dt>
-                    <dd className="text-foreground">{values.studentName}</dd>
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("student")}</dt>
+                    <dd className="min-w-0 break-words text-end text-foreground">
+                      {values.studentName}
+                    </dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("parent")}</dt>
-                    <dd className="text-foreground">{values.parentName}</dd>
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("parent")}</dt>
+                    <dd className="min-w-0 break-words text-end text-foreground">
+                      {values.parentName}
+                    </dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("email")}</dt>
-                    <dd className="text-foreground">{values.email}</dd>
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("email")}</dt>
+                    <dd className="min-w-0 break-all text-end text-foreground">
+                      {values.email}
+                    </dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("whatsapp")}</dt>
-                    <dd className="text-foreground">{values.whatsapp}</dd>
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("whatsapp")}</dt>
+                    <dd className="min-w-0 break-all text-end text-foreground">
+                      {values.whatsapp}
+                    </dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("course")}</dt>
-                    <dd className="text-foreground">
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("course")}</dt>
+                    <dd className="min-w-0 break-words text-end text-foreground">
                       {selectedCourse?.label ?? values.courseSlug}
                     </dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("schedule")}</dt>
-                    <dd className="text-right text-foreground">
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("schedule")}</dt>
+                    <dd className="min-w-0 break-words text-end text-foreground">
                       {values.preferredTime}
                     </dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>{t("location")}</dt>
-                    <dd className="text-right text-foreground">
+                  <div className="flex justify-between gap-3 sm:gap-4">
+                    <dt className="shrink-0">{t("location")}</dt>
+                    <dd className="min-w-0 break-words text-end text-foreground">
                       {values.country} · {values.timezone}
                     </dd>
                   </div>

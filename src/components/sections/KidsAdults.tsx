@@ -24,7 +24,7 @@ export function KidsAdults() {
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-2 lg:items-center">
         <div>
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
               {t("heading")}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted">

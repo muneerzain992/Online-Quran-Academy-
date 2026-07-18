@@ -31,7 +31,7 @@ export function PageHero({
       <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
         <Reveal>
           {eyebrow ? <p className="eyebrow mb-3">{eyebrow}</p> : null}
-          <h1 className="max-w-3xl font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="max-w-3xl font-display text-[1.875rem] font-semibold leading-tight tracking-tight text-foreground sm:text-4xl sm:leading-tight md:text-5xl">
             {title}
           </h1>
           {description ? (

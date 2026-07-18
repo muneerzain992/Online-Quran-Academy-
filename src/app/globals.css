@@ -61,6 +61,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   html.lenis,
@@ -76,6 +77,14 @@
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-geist-sans), system-ui, sans-serif;
+    overflow-x: clip;
+  }
+
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
   }
 
   ::selection {

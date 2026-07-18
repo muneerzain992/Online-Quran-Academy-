@@ -85,7 +85,7 @@ export function SearchDialog() {
 
       {open ? (
         <div
-          className="fixed inset-0 z-[80] flex items-start justify-center bg-navy/70 px-4 pt-[12vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[80] flex items-start justify-center bg-navy/70 px-3 pt-[max(4rem,10vh)] backdrop-blur-sm sm:px-4 sm:pt-[12vh]"
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}

@@ -52,14 +52,16 @@ export function Counter({
     <div className={cn("text-center", className)}>
       <span
         ref={ref}
-        className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
+        className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl"
       >
         {prefix}
         {display.toLocaleString()}
         {suffix}
       </span>
       {label ? (
-        <p className="mt-2 text-sm text-muted">{label}</p>
+        <p className="mt-2 px-1 text-xs leading-snug text-muted sm:text-sm">
+          {label}
+        </p>
       ) : null}
     </div>
   );

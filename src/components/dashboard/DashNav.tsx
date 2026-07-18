@@ -10,7 +10,7 @@ export function DashNav({ nav }: { nav: DashNavItem[] }) {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-row gap-2 overflow-x-auto lg:flex-col">
+    <nav className="-mx-1 flex flex-row gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:thin] lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
       {nav.map((item) => {
         const root =
           item.href === "/dashboard" ||
