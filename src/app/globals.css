@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+/* Brand tokens — "Blue" premium system */
+:root {
+  --navy: #0a1128;
+  --midnight: #0d1b3e;
+  --royal: #1e5aff;
+  --sky: #38bdf8;
+  --cyan: #22d3ee;
+  --ice: #f5f8ff;
+  --gold: #e8b923;
+  --text: #0a1128;
+  --text-muted: #4a5d7a;
+  --surface: #ffffff;
+  --surface-elevated: #f5f8ff;
+  --border: rgb(10 17 40 / 0.1);
+  --glass: rgb(255 255 255 / 0.72);
+  --glass-border: rgb(10 17 40 / 0.08);
+  --glow: rgb(30 90 255 / 0.25);
+
+  --background: var(--ice);
+  --foreground: var(--text);
+}
+
+.dark {
+  --text: #e8eeff;
+  --text-muted: #93a4c7;
+  --surface: #0d1b3e;
+  --surface-elevated: #122048;
+  --border: rgb(232 238 255 / 0.1);
+  --glass: rgb(13 27 62 / 0.65);
+  --glass-border: rgb(255 255 255 / 0.08);
+  --glow: rgb(56 189 248 / 0.2);
+
+  --background: var(--navy);
+  --foreground: var(--text);
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-midnight: var(--midnight);
+  --color-royal: var(--royal);
+  --color-sky: var(--sky);
+  --color-cyan: var(--cyan);
+  --color-ice: var(--ice);
+  --color-gold: var(--gold);
+  --color-muted: var(--text-muted);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-fraunces);
+  --font-arabic: var(--font-naskh);
+  --font-urdu: var(--font-nastaliq);
+  --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--royal) 35%, transparent);
+    color: var(--foreground);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  }
+
+  .font-arabic {
+    font-family: var(--font-naskh), "Noto Naskh Arabic", "Amiri", serif;
+    line-height: 1.85;
+    letter-spacing: 0;
+  }
+
+  .font-urdu {
+    /* Naskh for clear UI reading; Nastaliq reserved for .font-display headings */
+    font-family: var(--font-naskh), "Noto Naskh Arabic", "Noto Nastaliq Urdu", serif;
+    line-height: 2;
+    letter-spacing: 0;
+  }
+
+  /* Readable RTL typography for the whole site */
+  html[lang="ar"] body,
+  .locale-ar body {
+    font-family: var(--font-naskh), "Noto Naskh Arabic", serif;
+    font-size: 1.0625rem;
+    line-height: 1.95;
+  }
+
+  html[lang="ar"] .font-display,
+  .locale-ar .font-display {
+    font-family: var(--font-naskh), "Noto Naskh Arabic", serif;
+    line-height: 1.85;
+  }
+
+  html[lang="ur"] body,
+  .locale-ur body {
+    font-family: var(--font-naskh), "Noto Naskh Arabic", serif;
+    font-size: 1.0625rem;
+    line-height: 2;
+  }
+
+  html[lang="ur"] .font-display,
+  .locale-ur .font-display {
+    font-family: var(--font-nastaliq), "Noto Nastaliq Urdu", serif;
+    line-height: 2.05;
+  }
+
+  html[dir="rtl"] p,
+  html[dir="rtl"] li,
+  html[dir="rtl"] label,
+  html[dir="rtl"] input,
+  html[dir="rtl"] textarea,
+  html[dir="rtl"] button,
+  html[dir="rtl"] a {
+    line-height: 2;
+  }
+
+  html[lang="ar"] body,
+  html[lang="ur"] body {
+    font-size: 1.0625rem;
+  }
+
+  html[dir="rtl"] .eyebrow {
+    letter-spacing: 0.02em;
+  }
+
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .bg-hero-glow {
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -10%,
+        var(--glow),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 40% 40% at 90% 20%,
+        rgb(34 211 238 / 0.12),
+        transparent 50%
+      ),
+      var(--background);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--sky), var(--royal), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--royal);
+    outline-offset: 2px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .focus\:not-sr-only:focus,
+  .focus\:not-sr-only:focus-visible {
+    position: fixed;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  .animate-marquee {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+
+  .glass-strong {
+    background: color-mix(in srgb, var(--glass) 90%, transparent);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sky);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

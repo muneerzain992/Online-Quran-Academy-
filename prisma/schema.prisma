@@ -1,0 +1,271 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+enum TeacherGenderPref {
+  FEMALE
+  MALE
+  NO_PREFERENCE
+}
+
+enum BookingStatus {
+  NEW
+  CONTACTED
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+  INCOMPLETE
+}
+
+model User {
+  id               String         @id @default(cuid())
+  name             String?
+  email            String         @unique
+  emailVerified    DateTime?
+  passwordHash     String?
+  role             Role           @default(STUDENT)
+  image            String?
+  stripeCustomerId String?        @unique
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  accounts         Account[]
+  sessions         Session[]
+  posts            Post[]
+  subscription     Subscription?
+  teacherProfile   Teacher?
+  progressNotesAsStudent ProgressNote[] @relation("StudentNotes")
+  progressNotesAsTeacher ProgressNote[] @relation("TeacherNotes")
+  invoices         Invoice[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Teacher {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  name           String
+  bio            String
+  gender         Gender
+  certifications String[]
+  subjects       String[]
+  photo          String?
+  rating         Float    @default(5)
+  active         Boolean  @default(true)
+  userId         String?  @unique
+  user           User?    @relation(fields: [userId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ProgressNote {
+  id             String   @id @default(cuid())
+  studentUserId  String
+  student        User     @relation("StudentNotes", fields: [studentUserId], references: [id], onDelete: Cascade)
+  teacherUserId  String?
+  teacher        User?    @relation("TeacherNotes", fields: [teacherUserId], references: [id])
+  content        String
+  createdAt      DateTime @default(now())
+
+  @@index([studentUserId])
+}
+
+model Course {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  title     String
+  shortDesc String
+  longDesc  String
+  audience  String
+  duration  String
+  level     String
+  icon      String?
+  order     Int       @default(0)
+  published Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  bookings  Booking[]
+}
+
+model Plan {
+  id              String         @id @default(cuid())
+  name            String         @unique
+  priceUsd        Int
+  classesPerWeek  Int
+  minutesPerClass Int
+  features        String[]
+  stripePriceId   String?
+  popular         Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  subscriptions   Subscription[]
+}
+
+model Booking {
+  id                String            @id @default(cuid())
+  studentName       String
+  parentName        String
+  email             String
+  whatsapp          String
+  country           String
+  timezone          String
+  courseId          String?
+  course            Course?           @relation(fields: [courseId], references: [id])
+  preferredTime     String
+  teacherGenderPref TeacherGenderPref @default(NO_PREFERENCE)
+  status            BookingStatus     @default(NEW)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([email])
+  @@index([status])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  rating    Int      @default(5)
+  quote     String
+  avatar    String?
+  published Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  excerpt     String
+  contentJson Json
+  coverImage  String?
+  tags        String[]
+  authorId    String?
+  author      User?     @relation(fields: [authorId], references: [id])
+  publishedAt DateTime?
+  published   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  locale    String   @default("en")
+  createdAt DateTime @default(now())
+}
+
+model Subscription {
+  id               String             @id @default(cuid())
+  userId           String             @unique
+  user             User               @relation(fields: [userId], references: [id])
+  planId           String
+  plan             Plan               @relation(fields: [planId], references: [id])
+  stripeSubId      String?            @unique
+  status           SubscriptionStatus @default(INCOMPLETE)
+  currentPeriodEnd DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
+
+model Invoice {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripeInvoiceId String   @unique
+  amountUsd       Int
+  status          String
+  pdfUrl          String?
+  hostedUrl       String?
+  createdAt       DateTime @default(now())
+
+  @@index([userId])
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  referrer  String?
+  createdAt DateTime @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+}

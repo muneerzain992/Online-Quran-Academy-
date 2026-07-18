@@ -1,0 +1,12 @@
+export { Courses } from "./Courses";
+export { Faq } from "./Faq";
+export { FinalCta } from "./FinalCta";
+export { Hero } from "./Hero";
+export { HowWeConduct } from "./HowWeConduct";
+export { Instructors } from "./Instructors";
+export { KidsAdults } from "./KidsAdults";
+export { Pricing } from "./Pricing";
+export { RegionsMarquee } from "./RegionsMarquee";
+export { Stats } from "./Stats";
+export { Testimonials } from "./Testimonials";
+export { WhyChoose } from "./WhyChoose";
