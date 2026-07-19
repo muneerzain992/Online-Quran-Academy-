@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { SectionHeading } from "@/components/ui";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { CheckoutButton } from "@/components/billing/CheckoutButton";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { cn } from "@/lib/cn";
 
 export type PricingPlanItem = {
@@ -89,32 +87,10 @@ function PricingCard({
   classesText: string;
   durationText: string;
 }) {
-  const reduced = usePrefersReducedMotion();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const transform = useMotionTemplate`perspective(900px) rotateX(${y}deg) rotateY(${x}deg)`;
-
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (reduced) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
-    x.set((px - 0.5) * 10);
-    y.set((0.5 - py) * 8);
-  };
-
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
-    <motion.div
-      style={reduced ? undefined : { transform }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+    <div
       className={cn(
-        "relative h-full rounded-3xl border p-6 sm:p-8 will-change-transform",
+        "relative h-full rounded-3xl border p-6 sm:p-8 transition-transform duration-200 hover:-translate-y-0.5",
         plan.popular
           ? "border-gold/40 bg-gradient-to-b from-gold/10 via-surface/40 to-surface/20 shadow-[0_0_40px_rgb(232_185_35_/_0.12)]"
           : "glass",
@@ -144,6 +120,6 @@ function PricingCard({
         popular={plan.popular}
         label={ctaLabel}
       />
-    </motion.div>
+    </div>
   );
 }

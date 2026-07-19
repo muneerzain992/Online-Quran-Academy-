@@ -3,19 +3,11 @@
 import { CheckCircle2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui";
-import {
-  MagneticButton,
-  Reveal,
-  Stagger,
-  StaggerItem,
-} from "@/components/motion";
-import { motion } from "framer-motion";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 
 export function KidsAdults() {
   const t = useTranslations("Home.kidsAdults");
   const tCta = useTranslations("Cta");
-  const reduced = usePrefersReducedMotion();
   const learn = t.raw("learn") as string[];
   const badges = [t("badgeTrial"), t("badgeFee")];
 
@@ -34,18 +26,8 @@ export function KidsAdults() {
 
           <Reveal delay={0.1} className="mt-8 flex flex-wrap gap-3">
             {badges.map((badge, i) => (
-              <motion.span
+              <span
                 key={badge}
-                animate={
-                  reduced
-                    ? undefined
-                    : { scale: [1, 1.03, 1], opacity: [0.9, 1, 0.9] }
-                }
-                transition={{
-                  duration: 2.4,
-                  repeat: Infinity,
-                  delay: i * 0.35,
-                }}
                 className={`inline-flex rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide ${
                   i === 0
                     ? "border border-gold/40 bg-gold/15 text-gold"
@@ -53,17 +35,19 @@ export function KidsAdults() {
                 }`}
               >
                 {badge}
-              </motion.span>
+              </span>
             ))}
           </Reveal>
 
           <Reveal delay={0.18} className="mt-8">
-            <MagneticButton href="/book">{t("cta")}</MagneticButton>
+            <Button href="/book">{t("cta")}</Button>
           </Reveal>
         </div>
 
         <div>
-          <p className="mb-4 text-sm font-medium text-sky">{tCta("exploreCourses")}</p>
+          <p className="mb-4 text-sm font-medium text-sky">
+            {tCta("exploreCourses")}
+          </p>
           <Stagger className="grid gap-3 sm:grid-cols-2">
             {learn.map((item) => (
               <StaggerItem key={item}>

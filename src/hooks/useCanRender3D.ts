@@ -14,23 +14,26 @@ function hasWebGL() {
   }
 }
 
-function isLowPowerDevice() {
+function shouldSkip3D() {
   const cores = navigator.hardwareConcurrency ?? 4;
   const memory = (navigator as Navigator & { deviceMemory?: number })
     .deviceMemory;
   const saveData = (
     navigator as Navigator & { connection?: { saveData?: boolean } }
   ).connection?.saveData;
-  const narrow = window.matchMedia("(max-width: 640px)").matches;
+  const mobile = window.matchMedia("(max-width: 1023px)").matches;
+  const coarse = window.matchMedia("(pointer: coarse)").matches;
+
   if (saveData) return true;
-  if (memory !== undefined && memory <= 2) return true;
-  if (narrow && cores <= 4) return true;
+  if (mobile || coarse) return true;
+  if (memory !== undefined && memory <= 4) return true;
+  if (cores <= 4) return true;
   return false;
 }
 
 /**
- * Gates heavy R3F scenes. Falls back when motion is reduced,
- * WebGL is missing, or the device looks power-constrained.
+ * Gates heavy R3F scenes. Off by default on mobile / low-power devices.
+ * Defers enable until idle so first paint stays light.
  */
 export function useCanRender3D() {
   const reduced = usePrefersReducedMotion();
@@ -38,13 +41,38 @@ export function useCanRender3D() {
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    setAllowed(hasWebGL() && !isLowPowerDevice());
-    setReady(true);
-  }, []);
+    if (reduced || shouldSkip3D() || !hasWebGL()) {
+      setAllowed(false);
+      setReady(true);
+      return;
+    }
+
+    let cancelled = false;
+    const enable = () => {
+      if (!cancelled) {
+        setAllowed(true);
+        setReady(true);
+      }
+    };
+
+    const ric = window.requestIdleCallback?.bind(window);
+    if (ric) {
+      const id = ric(enable, { timeout: 1200 });
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback?.(id);
+      };
+    }
+
+    const timer = globalThis.setTimeout(enable, 600);
+    return () => {
+      cancelled = true;
+      globalThis.clearTimeout(timer);
+    };
+  }, [reduced]);
 
   return {
     ready,
-    /** True only when 3D should mount */
     enabled: ready && !reduced && allowed,
     reduced,
   };

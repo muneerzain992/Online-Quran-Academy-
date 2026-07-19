@@ -6,8 +6,8 @@ import "lenis/dist/lenis.css";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 /**
- * Lenis smooth scrolling — disabled when user prefers reduced motion.
- * GSAP ScrollTrigger can sync with this in Phase 3 via Lenis scroll events.
+ * Desktop-only Lenis smooth scrolling.
+ * Disabled on touch / narrow screens to keep scroll native and light.
  */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const reduced = usePrefersReducedMotion();
@@ -15,25 +15,46 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (reduced) return;
 
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const narrow = window.matchMedia("(max-width: 1023px)").matches;
+    if (coarse || narrow) return;
+
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.75,
       smoothWheel: true,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1,
+      syncTouch: false,
     });
 
     let frame = 0;
+    let running = true;
+
     const raf = (time: number) => {
+      if (!running) return;
       lenis.raf(time);
       frame = requestAnimationFrame(raf);
     };
     frame = requestAnimationFrame(raf);
 
-    document.documentElement.classList.add("lenis");
+    const onVisibility = () => {
+      if (document.hidden) {
+        running = false;
+        cancelAnimationFrame(frame);
+      } else if (!running) {
+        running = true;
+        frame = requestAnimationFrame(raf);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    document.documentElement.classList.add("lenis", "lenis-smooth");
 
     return () => {
+      running = false;
       cancelAnimationFrame(frame);
+      document.removeEventListener("visibilitychange", onVisibility);
       lenis.destroy();
-      document.documentElement.classList.remove("lenis");
+      document.documentElement.classList.remove("lenis", "lenis-smooth");
     };
   }, [reduced]);
 

@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui";
-import { MagneticButton, Reveal, TextReveal } from "@/components/motion";
 import { site } from "@/config/site";
 import { HeroVisual } from "./HeroVisual";
 
@@ -16,35 +15,26 @@ export async function Hero() {
       />
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-12 lg:py-28">
         <div className="relative z-10 min-w-0">
-          <Reveal>
-            <p className="mb-5 inline-flex rounded-full border border-border bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-sky">
-              {t("eyebrow")}
-            </p>
-          </Reveal>
+          <p className="mb-5 inline-flex rounded-full border border-border bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-sky">
+            {t("eyebrow")}
+          </p>
 
-          <TextReveal
-            as="h1"
-            text={t("headline")}
-            className="font-display text-[1.875rem] font-semibold leading-tight tracking-tight text-foreground sm:text-4xl sm:leading-tight md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]"
-            delay={0.05}
-          />
+          <h1 className="font-display text-[1.875rem] font-semibold leading-tight tracking-tight text-foreground sm:text-4xl sm:leading-tight md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
+            {t("headline")}
+          </h1>
 
-          <Reveal delay={0.15} className="mt-6">
-            <p className="max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              {t("subheading")}
-            </p>
-          </Reveal>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+            {t("subheading")}
+          </p>
 
-          <Reveal delay={0.22} className="mt-5">
-            <p className="text-sm font-medium text-foreground/90 sm:text-base">
-              {t("priceLine", { price: site.startingPrice })}
-            </p>
-          </Reveal>
+          <p className="mt-5 text-sm font-medium text-foreground/90 sm:text-base">
+            {t("priceLine", { price: site.startingPrice })}
+          </p>
 
-          <Reveal delay={0.3} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <MagneticButton href="/book" className="w-full sm:w-auto">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button href="/book" className="w-full sm:w-auto">
               {tCta("bookTrial")}
-            </MagneticButton>
+            </Button>
             <Button
               href="/courses"
               variant="secondary"
@@ -52,12 +42,12 @@ export async function Hero() {
             >
               {tCta("exploreCourses")}
             </Button>
-          </Reveal>
+          </div>
         </div>
 
-        <Reveal delay={0.2} className="relative lg:justify-self-end">
+        <div className="relative lg:justify-self-end">
           <HeroVisual />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

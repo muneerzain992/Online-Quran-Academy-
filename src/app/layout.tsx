@@ -31,19 +31,23 @@ const geistMono = Geist_Mono({
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["500", "600", "700"],
 });
 
 const notoNaskh = Noto_Naskh_Arabic({
   variable: "--font-naskh",
   subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
+  preload: false,
+  display: "swap",
 });
 
 const notoNastaliq = Noto_Nastaliq_Urdu({
   variable: "--font-nastaliq",
   subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
+  preload: false,
+  display: "swap",
 });
 
 const siteUrl = getSiteUrl();
@@ -104,14 +108,22 @@ export default async function RootLayout({
   const locale = (await getLocale()) as Locale;
   const messages = await getMessages();
   const dir = localeDirections[locale];
+  const fontVars = [
+    geistSans.variable,
+    geistMono.variable,
+    fraunces.variable,
+    locale === "ar" || locale === "ur" ? notoNaskh.variable : "",
+    locale === "ur" ? notoNastaliq.variable : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <html
       lang={locale}
       dir={dir}
       suppressHydrationWarning
-      data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${notoNaskh.variable} ${notoNastaliq.variable} h-full antialiased`}
+      className={`${fontVars} h-full antialiased`}
     >
       <body
         className={`min-h-full bg-background text-foreground ${bodyFontClass(locale)}`}
