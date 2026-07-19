@@ -157,7 +157,7 @@ export function PhoneInput({
             ref={menuRef}
             role="listbox"
             aria-label={t("ariaList")}
-            className="fixed z-[200] overflow-hidden rounded-xl border border-border bg-midnight shadow-2xl"
+            className="fixed z-[200] overflow-hidden rounded-xl border border-border bg-surface shadow-2xl"
             style={{ top: pos.top, left: pos.left, width: pos.width }}
           >
             <div className="flex items-center gap-2 border-b border-border px-3 py-2">
@@ -229,7 +229,7 @@ export function PhoneInput({
           aria-expanded={open}
           aria-label={t("ariaCode")}
           onClick={() => setOpen((v) => !v)}
-          className="flex min-w-[5.5rem] shrink-0 items-center justify-between gap-1 rounded-s-xl border-e border-border px-2 py-2.5 text-sm text-foreground hover:bg-white/5 sm:min-w-[7.75rem] sm:px-2.5"
+          className="flex min-w-[5.5rem] shrink-0 items-center justify-between gap-1 rounded-s-xl border-e border-border px-2 py-2.5 text-sm text-foreground hover:bg-surface-elevated sm:min-w-[7.75rem] sm:px-2.5"
         >
           {country ? (
             <>

@@ -144,7 +144,7 @@ export default async function CourseDetailPage({ params }: Props) {
         </Reveal>
       </section>
 
-      <section className="border-t border-border/60 bg-midnight/20 py-16">
+      <section className="border-t border-border/60 bg-section-band py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="font-display text-2xl font-semibold text-foreground">
             {t("related")}

@@ -73,7 +73,7 @@ export function SearchDialog() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="focus-ring inline-flex h-9 items-center gap-2 rounded-lg px-2 text-muted hover:bg-white/5 hover:text-foreground"
+        className="focus-ring inline-flex h-9 items-center gap-2 rounded-lg px-2 text-muted hover:bg-surface-elevated hover:text-foreground"
         aria-label={t("label")}
       >
         <Search className="h-4 w-4" aria-hidden />

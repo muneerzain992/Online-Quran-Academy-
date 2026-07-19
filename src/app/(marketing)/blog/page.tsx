@@ -51,7 +51,7 @@ export default async function BlogPage({ searchParams }: Props) {
               className={`focus-ring rounded-lg px-3 py-1.5 text-xs ${
                 !tag
                   ? "bg-royal/20 text-sky"
-                  : "bg-white/5 text-muted hover:text-foreground"
+                  : "bg-surface-elevated text-muted hover:text-foreground"
               }`}
             >
               {t("all")}
@@ -63,7 +63,7 @@ export default async function BlogPage({ searchParams }: Props) {
                 className={`focus-ring rounded-lg px-3 py-1.5 text-xs ${
                   tag === tagName
                     ? "bg-royal/20 text-sky"
-                    : "bg-white/5 text-muted hover:text-foreground"
+                    : "bg-surface-elevated text-muted hover:text-foreground"
                 }`}
               >
                 {tagName}

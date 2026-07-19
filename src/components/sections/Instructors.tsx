@@ -17,7 +17,7 @@ export function Instructors() {
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-midnight via-navy to-royal/40 p-8 sm:p-10">
+          <div className="panel-dark relative overflow-hidden rounded-3xl border border-white/15 p-8 sm:p-10">
             <div className="absolute -end-10 -top-10 h-40 w-40 rounded-full bg-cyan/20 blur-3xl" />
             <div className="absolute -bottom-8 -start-8 h-32 w-32 rounded-full bg-royal/30 blur-2xl" />
             <div className="relative">
@@ -25,14 +25,14 @@ export function Instructors() {
                 {labels.map((label) => (
                   <span
                     key={label}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-sky"
+                    className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-on-dark"
                   >
                     {label}
                   </span>
                 ))}
               </div>
               <p
-                className="font-arabic text-3xl leading-loose text-foreground/90 sm:text-4xl"
+                className="font-arabic text-3xl leading-loose text-on-dark sm:text-4xl"
                 dir="rtl"
                 lang="ar"
               >

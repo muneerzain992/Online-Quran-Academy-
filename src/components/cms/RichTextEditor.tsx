@@ -64,7 +64,7 @@ export function RichTextEditor({
             key={label}
             type="button"
             onClick={action}
-            className="rounded-lg px-2 py-1 text-xs text-muted hover:bg-white/10 hover:text-foreground"
+            className="rounded-lg px-2 py-1 text-xs text-muted hover:bg-surface-elevated hover:text-foreground"
           >
             {label}
           </button>

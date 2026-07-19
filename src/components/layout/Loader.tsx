@@ -53,7 +53,9 @@ export function Loader() {
             priority
           />
         </div>
-        <p className="font-display text-sm text-muted">{site.shortName}</p>
+        <p className="font-display text-sm text-on-dark-muted">
+          {site.shortName}
+        </p>
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export function Navbar() {
                 className={`focus-ring rounded-lg px-3 py-2 text-sm transition-colors ${
                   active
                     ? "bg-royal/15 font-medium text-sky"
-                    : "text-muted hover:bg-white/5 hover:text-foreground"
+                    : "text-muted hover:bg-surface-elevated hover:text-foreground"
                 }`}
               >
                 {tNav(item.key)}

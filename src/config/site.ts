@@ -15,8 +15,7 @@ export const site = {
   /** Digits only for wa.me links */
   whatsappE164: "923097339756",
   facebookUrl: "https://www.facebook.com/share/1DYCF1J4oE/",
-  instagramUrl:
-    "https://www.instagram.com/ferhathashmi?igsh=MW00MjE1aDI4eGFreA==",
+  instagramUrl: "https://www.instagram.com/ferhathashmi/",
   tiktokUrl:
     "https://www.tiktok.com/@dr.farhat.hashmi37?_r=1&_t=ZS-988tLJtPaxm",
   logo: "/logo.png",

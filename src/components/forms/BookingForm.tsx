@@ -201,7 +201,7 @@ export function BookingForm() {
                 ? "bg-royal/20 text-sky"
                 : step > s.id
                   ? "bg-cyan/10 text-cyan"
-                  : "bg-white/5 text-muted",
+                  : "bg-surface-elevated text-muted",
             )}
           >
             {s.id}. {s.title}

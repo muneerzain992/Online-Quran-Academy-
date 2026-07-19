@@ -4,10 +4,10 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 const variants = {
   primary:
-    "bg-royal text-white shadow-[0_0_24px_rgb(30_90_255_/_0.35)] hover:bg-royal/90",
+    "bg-royal text-white shadow-[0_0_24px_rgb(30_90_255_/_0.28)] hover:bg-royal/90",
   secondary:
-    "glass text-foreground hover:border-sky/40 hover:bg-white/10",
-  ghost: "text-muted hover:bg-white/5 hover:text-foreground",
+    "border border-border bg-surface text-foreground shadow-sm hover:border-sky/40 hover:bg-surface-elevated",
+  ghost: "text-muted hover:bg-surface-elevated hover:text-foreground",
   gold: "bg-gold/15 text-gold border border-gold/40 hover:bg-gold/25",
 } as const;
 

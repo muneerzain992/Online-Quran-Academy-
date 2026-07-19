@@ -40,8 +40,8 @@ export function LangSwitcher({ className }: { className?: string }) {
             className={cn(
               "focus-ring rounded-md px-2 py-1 text-xs font-medium transition-colors",
               active
-                ? "bg-royal/20 text-sky"
-                : "text-muted hover:bg-white/5 hover:text-foreground",
+                ? "bg-royal/15 font-semibold text-sky"
+                : "text-muted hover:bg-surface-elevated hover:text-foreground",
               pending && "opacity-60",
             )}
           >

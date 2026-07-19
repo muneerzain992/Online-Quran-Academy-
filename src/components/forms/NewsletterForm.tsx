@@ -60,7 +60,7 @@ export function NewsletterForm() {
           placeholder={t("placeholder")}
           disabled={status === "loading"}
           aria-invalid={!!fieldError}
-          className="focus-ring w-full min-w-0 rounded-xl border border-border bg-surface/50 px-3 py-2 text-sm text-foreground placeholder:text-muted disabled:opacity-60"
+          className="focus-ring w-full min-w-0 rounded-xl border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted disabled:opacity-60"
         />
         <button
           type="submit"
@@ -71,13 +71,13 @@ export function NewsletterForm() {
         </button>
       </div>
       {fieldError ? (
-        <p role="alert" className="text-[11px] text-red-400">
+        <p role="alert" className="text-[11px] text-red-600 dark:text-red-400">
           {fieldError}
         </p>
       ) : status === "success" || status === "error" ? (
         <p
           role="status"
-          className={`text-[11px] ${status === "success" ? "text-cyan" : "text-red-400"}`}
+          className={`text-[11px] ${status === "success" ? "text-cyan" : "text-red-600 dark:text-red-400"}`}
         >
           {message}
         </p>

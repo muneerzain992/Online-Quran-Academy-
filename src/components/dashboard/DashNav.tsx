@@ -27,7 +27,7 @@ export function DashNav({ nav }: { nav: DashNavItem[] }) {
               "focus-ring whitespace-nowrap rounded-xl px-3 py-2 text-sm",
               active
                 ? "bg-royal/20 text-sky"
-                : "text-muted hover:bg-white/5 hover:text-foreground",
+                : "text-muted hover:bg-surface-elevated hover:text-foreground",
             )}
           >
             {item.label}

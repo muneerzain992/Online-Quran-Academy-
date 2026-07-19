@@ -40,7 +40,7 @@ export function Courses({ items }: { items: HomeCourse[] }) {
   return (
     <section
       id="courses"
-      className="border-y border-border/60 bg-midnight/20 py-20 sm:py-24"
+      className="border-y border-border/60 bg-section-band py-20 sm:py-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>

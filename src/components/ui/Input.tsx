@@ -22,13 +22,13 @@ export function Input({ label, error, className, id, ...props }: InputProps) {
       <input
         id={inputId}
         className={cn(
-          "focus-ring w-full rounded-xl border border-border bg-surface/50 px-3 py-2.5 text-sm text-foreground placeholder:text-muted",
-          error && "border-red-400/60",
+          "focus-ring w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-foreground placeholder:text-muted",
+          error && "border-red-500/70",
           className,
         )}
         {...props}
       />
-      {error ? <p className="text-xs text-red-400">{error}</p> : null}
+      {error ? <p className="text-xs text-red-600 dark:text-red-400">{error}</p> : null}
     </div>
   );
 }
@@ -60,13 +60,13 @@ export function Textarea({
       <textarea
         id={inputId}
         className={cn(
-          "focus-ring min-h-28 w-full resize-y rounded-xl border border-border bg-surface/50 px-3 py-2.5 text-sm text-foreground placeholder:text-muted",
-          error && "border-red-400/60",
+          "focus-ring min-h-28 w-full resize-y rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-foreground placeholder:text-muted",
+          error && "border-red-500/70",
           className,
         )}
         {...props}
       />
-      {error ? <p className="text-xs text-red-400">{error}</p> : null}
+      {error ? <p className="text-xs text-red-600 dark:text-red-400">{error}</p> : null}
     </div>
   );
 }

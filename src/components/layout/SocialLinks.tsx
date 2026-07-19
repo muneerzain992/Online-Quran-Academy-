@@ -81,7 +81,7 @@ export function SocialLinks({
           rel="noopener noreferrer"
           aria-label={label}
           role="listitem"
-          className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/5 text-muted transition hover:border-sky/40 hover:bg-royal/10 hover:text-sky"
+          className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface text-muted transition hover:border-sky/40 hover:bg-royal/10 hover:text-sky"
         >
           <Icon className="h-5 w-5" />
         </a>

@@ -15,7 +15,7 @@ export async function Hero() {
       />
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-12 lg:py-28">
         <div className="relative z-10 min-w-0">
-          <p className="mb-5 inline-flex rounded-full border border-border bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-sky">
+          <p className="mb-5 inline-flex rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium tracking-wide text-sky shadow-sm">
             {t("eyebrow")}
           </p>
 

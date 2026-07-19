@@ -12,7 +12,7 @@ export function KidsAdults() {
   const badges = [t("badgeTrial"), t("badgeFee")];
 
   return (
-    <section className="relative overflow-hidden border-y border-border/60 bg-midnight/25">
+    <section className="relative overflow-hidden border-y border-border/60 bg-section-band">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-2 lg:items-center">
         <div>
           <Reveal>

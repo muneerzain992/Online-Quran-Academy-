@@ -62,7 +62,7 @@ export function Testimonials({ items }: { items: TestimonialItem[] }) {
   const next = () => setIndex((i) => (i + 1) % list.length);
 
   return (
-    <section className="border-y border-border/60 bg-midnight/25 py-20 sm:py-24">
+    <section className="border-y border-border/60 bg-section-band py-20 sm:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <Reveal>
           <SectionHeading

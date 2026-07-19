@@ -6,13 +6,13 @@ export async function FinalCta() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
-      <div className="relative overflow-hidden rounded-[2rem] border border-sky/20 bg-gradient-to-br from-royal/30 via-midnight to-navy px-6 py-14 text-center sm:px-12">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgb(56_189_248_/_0.2),transparent_55%)]" />
+      <div className="panel-dark relative overflow-hidden rounded-[2rem] border border-white/15 px-6 py-14 text-center sm:px-12">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgb(56_189_248_/_0.22),transparent_55%)]" />
         <div className="relative mx-auto max-w-2xl">
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-on-dark sm:text-3xl md:text-4xl">
             {t("heading")}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-on-dark-muted sm:text-lg">
             {t("body")}
           </p>
           <div className="mt-8 flex justify-center">

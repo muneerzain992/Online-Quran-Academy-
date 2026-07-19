@@ -14,7 +14,7 @@ export function Footer() {
   const tSite = useTranslations("Site");
 
   return (
-    <footer className="relative mt-auto border-t border-border bg-midnight/40">
+    <footer className="relative mt-auto border-t border-border bg-section-band">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 lg:col-span-1">
           <Logo showText={false} size="md" />
