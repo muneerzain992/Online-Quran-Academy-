@@ -4,22 +4,14 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/layout";
 import { Button } from "@/components/ui";
 import { Reveal } from "@/components/motion";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/config/site";
 import { getPostBySlug, getPublishedPosts } from "@/lib/cms";
-import { prisma } from "@/lib/prisma";
+import { blogPostingJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  try {
-    const rows = await prisma.post.findMany({
-      where: { published: true },
-      select: { slug: true },
-    });
-    if (rows.length) return rows.map((r) => ({ slug: r.slug }));
-  } catch {
-    /* build-time without DB */
-  }
   const posts = await getPublishedPosts();
   return posts.map((p) => ({ slug: p.slug }));
 }
@@ -31,12 +23,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    keywords: post.tags,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
+      url: `/blog/${post.slug}`,
       publishedTime: post.publishedAt,
       tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
     },
   };
 }
@@ -53,6 +55,24 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={blogPostingJsonLd({
+          title: post.title,
+          excerpt: post.excerpt,
+          slug: post.slug,
+          publishedAt: post.publishedAt,
+          authorName: post.authorName,
+          tags: post.tags,
+          coverImage: post.coverImage,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow="Blog"
         title={post.title}
@@ -73,7 +93,7 @@ export default async function BlogPostPage({ params }: Props) {
       <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
         <Reveal>
           <div
-            className="prose prose-invert max-w-none text-muted prose-headings:font-display prose-headings:text-foreground prose-a:text-sky"
+            className="prose dark:prose-invert max-w-none text-muted prose-headings:font-display prose-headings:text-foreground prose-a:text-sky"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
         </Reveal>

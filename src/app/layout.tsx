@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { site } from "@/config/site";
+import { metaKeywords, seoDefaults } from "@/config/seo-keywords";
 import { localeDirections, type Locale } from "@/i18n/config";
 import { getSiteUrl } from "@/lib/seo";
 import "./globals.css";
@@ -55,7 +56,7 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: site.name,
+    default: seoDefaults.title,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -63,35 +64,40 @@ export const metadata: Metadata = {
     icon: site.logo,
     apple: site.logo,
   },
-  keywords: [
-    "online Quran academy",
-    "learn Quran online",
-    "online Quran classes for kids",
-    "Quran classes USA",
-    "Quran classes UK",
-    "Quran classes Canada",
-    "Norani Qaida online",
-    "Nazra Quran",
-    "Hifz online",
-    "Tajweed course online",
-    "female Quran teachers",
-  ],
+  keywords: [...metaKeywords],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
     siteName: site.name,
-    title: site.name,
+    title: seoDefaults.ogTitle,
     description: site.description,
+    images: [
+      {
+        url: site.logo,
+        width: 512,
+        height: 512,
+        alt: site.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
+    title: seoDefaults.ogTitle,
     description: site.description,
+    images: [site.logo],
   },
-  alternates: {
-    canonical: "/",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+  category: "education",
 };
 
 function bodyFontClass(locale: Locale) {

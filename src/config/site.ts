@@ -8,7 +8,7 @@ export const site = {
   monogram: "DFH",
   tagline: "Illuminating Hearts Through Quranic Education",
   description:
-    "Trusted online Quran education for overseas Pakistani and Muslim families, with certified teachers and a safe, values-based Islamic environment.",
+    "Best online Quran academy for kids and adults. Live one-to-one Quran classes, Tajweed, Hifz, Noorani Qaida, and Islamic studies with male and female teachers. Free trial for families in USA, UK, Canada, Australia, Saudi Arabia, UAE, Qatar, Bahrain, Oman, and worldwide.",
 
   email: "ferhathashmi1@gmail.com",
   phone: "+92 309 7339756",
@@ -21,15 +21,22 @@ export const site = {
   logo: "/logo.png",
 
   serving:
-    "Serving Students Worldwide from UK, USA & Canada, Saudi Arabia, Bahrain, Qatar, Oman and all over the world",
+    "Serving students worldwide — USA, UK, Canada, Australia, Germany, Saudi Arabia, UAE, Qatar, Bahrain, Oman, Kuwait, New Zealand, Ireland, South Africa, and beyond",
   regions: [
-    "UK",
-    "USA",
+    "United States",
+    "United Kingdom",
     "Canada",
+    "Australia",
+    "Germany",
     "Saudi Arabia",
-    "Bahrain",
+    "United Arab Emirates",
     "Qatar",
+    "Bahrain",
     "Oman",
+    "Kuwait",
+    "New Zealand",
+    "Ireland",
+    "South Africa",
   ] as const,
 
   trialOffer: "3 Days Free Trial Classes",
@@ -58,12 +65,12 @@ export const site = {
   ] as const,
 
   footerCourses: [
+    { label: "Noorani Qaida Online", href: "/courses/norani-qaida" },
+    { label: "Nazra Quran", href: "/courses/nazra-quran" },
     { label: "Tajweed Course", href: "/courses/tajweed" },
-    { label: "Hifz-ul-Quran", href: "/courses/hifz-ul-quran" },
-    { label: "Quran Translation & Basic Tafseer", href: "/courses/quran-translation-tafseer" },
+    { label: "Hifz-ul-Quran Online", href: "/courses/hifz-ul-quran" },
+    { label: "Quran Translation & Tafseer", href: "/courses/quran-translation-tafseer" },
     { label: "Islamic Duas and Salah", href: "/courses/islamic-duas-salah" },
-    { label: "Sahabiyat Course", href: "/courses/sahabiyat" },
-    { label: "Personal Development & Life Skills", href: "/courses/personal-development" },
   ] as const,
 
   legal: [

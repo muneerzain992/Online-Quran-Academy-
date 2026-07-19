@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Courses,
   Faq,
@@ -13,6 +14,8 @@ import {
   WhyChoose,
 } from "@/components/sections";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { seoDefaults } from "@/config/seo-keywords";
+import { site } from "@/config/site";
 import {
   getPlans,
   getPublishedCourses,
@@ -23,7 +26,23 @@ import {
   faqJsonLd,
   organizationJsonLd,
   reviewJsonLd,
+  websiteJsonLd,
 } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: seoDefaults.title,
+  },
+  description: site.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: seoDefaults.ogTitle,
+    description: site.description,
+    url: "/",
+  },
+};
 
 export default async function HomePage() {
   const [courses, plans, faqs, testimonials] = await Promise.all([
@@ -36,6 +55,7 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={websiteJsonLd()} />
       <JsonLd data={faqJsonLd(faqs)} />
       {testimonials.length ? (
         <JsonLd data={reviewJsonLd(testimonials)} />

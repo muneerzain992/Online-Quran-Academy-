@@ -38,8 +38,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const messages = await getMessages();
   const localized = localizeCourse(course, messages, locale);
   return {
-    title: localized.title,
-    description: localized.description,
+    title: `${localized.title} | Online Quran Course`,
+    description: `${localized.description} Book live one-to-one online Quran classes with a free trial at ${site.shortName}.`,
+    alternates: {
+      canonical: `/courses/${slug}`,
+    },
+    openGraph: {
+      title: localized.title,
+      description: localized.description,
+      url: `/courses/${slug}`,
+    },
   };
 }
 
@@ -96,7 +104,7 @@ export default async function CourseDetailPage({ params }: Props) {
           <div className="space-y-6">
             {isHtml ? (
               <div
-                className="prose prose-invert max-w-none text-muted"
+                className="prose dark:prose-invert max-w-none text-muted"
                 dangerouslySetInnerHTML={{ __html: course.longDesc }}
               />
             ) : (

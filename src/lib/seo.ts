@@ -1,4 +1,5 @@
 import { getSocialProfileUrls, site } from "@/config/site";
+import { seoDefaults } from "@/config/seo-keywords";
 
 export function getSiteUrl() {
   return (
@@ -13,16 +14,55 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     name: site.name,
+    alternateName: [
+      site.shortName,
+      "Online Quran Academy",
+      "Best Online Quran Academy",
+    ],
     description: site.description,
     url,
     email: site.email,
     telephone: site.phone,
     logo: `${url}${site.logo}`,
+    image: `${url}${site.logo}`,
     sameAs: getSocialProfileUrls(),
     areaServed: site.regions.map((name) => ({
       "@type": "Place",
       name,
     })),
+    offers: {
+      "@type": "Offer",
+      name: site.trialOffer,
+      price: "0",
+      priceCurrency: "USD",
+      description: "Free Quran trial class for new students",
+      url: `${url}/book`,
+    },
+  };
+}
+
+export function websiteJsonLd() {
+  const url = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: seoDefaults.title,
+    url,
+    description: site.description,
+    publisher: {
+      "@type": "EducationalOrganization",
+      name: site.name,
+      url,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${url}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 
@@ -43,6 +83,54 @@ export function courseJsonLd(course: {
       name: site.name,
       url,
     },
+    inLanguage: ["en", "ur", "ar"],
+    isAccessibleForFree: false,
+    offers: {
+      "@type": "Offer",
+      category: "Paid",
+      url: `${url}/book`,
+      description: `${site.trialOffer}. Plans from ${site.startingPrice}.`,
+    },
+  };
+}
+
+export function blogPostingJsonLd(post: {
+  title: string;
+  excerpt: string;
+  slug: string;
+  publishedAt: string;
+  authorName: string;
+  tags?: string[];
+  coverImage?: string | null;
+}) {
+  const url = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url: `${url}/blog/${post.slug}`,
+    mainEntityOfPage: `${url}/blog/${post.slug}`,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: {
+      "@type": "Person",
+      name: post.authorName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${url}${site.logo}`,
+      },
+    },
+    image: post.coverImage
+      ? post.coverImage.startsWith("http")
+        ? post.coverImage
+        : `${url}${post.coverImage}`
+      : `${url}${site.logo}`,
+    keywords: post.tags?.join(", "),
   };
 }
 

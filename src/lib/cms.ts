@@ -181,7 +181,43 @@ export async function getPublishedTestimonials() {
   return testimonials.map((t) => ({ ...t }));
 }
 
+type CmsPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  contentHtml: string;
+  coverImage?: string | null;
+  tags: string[];
+  authorName: string;
+  publishedAt: string;
+};
+
+function mergePosts(dbPosts: CmsPost[]): CmsPost[] {
+  const bySlug = new Map<string, CmsPost>();
+  for (const p of dbPosts) {
+    bySlug.set(p.slug, p);
+  }
+  // Static SEO posts win for matching slugs so blog content stays keyword-fresh.
+  for (const p of staticPosts) {
+    bySlug.set(p.slug, {
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      contentHtml: p.contentHtml,
+      coverImage: p.coverImage ?? null,
+      tags: p.tags,
+      authorName: p.authorName,
+      publishedAt: p.publishedAt,
+    });
+  }
+  return [...bySlug.values()].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+}
+
 export async function getPublishedPosts(tag?: string) {
+  let dbPosts: CmsPost[] = [];
   try {
     const rows = await prisma.post.findMany({
       where: {
@@ -191,29 +227,37 @@ export async function getPublishedPosts(tag?: string) {
       orderBy: { publishedAt: "desc" },
       include: { author: { select: { name: true } } },
     });
-    if (rows.length) {
-      return rows.map((p) => ({
-        slug: p.slug,
-        title: p.title,
-        excerpt: p.excerpt,
-        contentHtml: contentJsonToHtml(p.contentJson),
-        coverImage: p.coverImage,
-        tags: p.tags,
-        authorName: p.author?.name ?? "Academy",
-        publishedAt: (p.publishedAt ?? p.createdAt).toISOString(),
-      }));
-    }
+    dbPosts = rows.map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      contentHtml: contentJsonToHtml(p.contentJson),
+      coverImage: p.coverImage,
+      tags: p.tags,
+      authorName: p.author?.name ?? "Academy",
+      publishedAt: (p.publishedAt ?? p.createdAt).toISOString(),
+    }));
   } catch {
-    /* fallback */
+    /* fallback to static only */
   }
-  const all = [...staticPosts].sort(
-    (a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-  );
+  const all = mergePosts(dbPosts);
   return tag ? all.filter((p) => p.tags.includes(tag)) : all;
 }
 
 export async function getPostBySlug(slug: string) {
+  const staticPost = staticPosts.find((p) => p.slug === slug);
+  if (staticPost) {
+    return {
+      slug: staticPost.slug,
+      title: staticPost.title,
+      excerpt: staticPost.excerpt,
+      contentHtml: staticPost.contentHtml,
+      coverImage: staticPost.coverImage ?? null,
+      tags: staticPost.tags,
+      authorName: staticPost.authorName,
+      publishedAt: staticPost.publishedAt,
+    };
+  }
   try {
     const p = await prisma.post.findFirst({
       where: { slug, published: true },
@@ -234,7 +278,7 @@ export async function getPostBySlug(slug: string) {
   } catch {
     /* fallback */
   }
-  return staticPosts.find((p) => p.slug === slug) ?? null;
+  return null;
 }
 
 export async function getAllPostTags() {
